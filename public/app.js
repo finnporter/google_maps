@@ -22,6 +22,9 @@ var initialize = function() {
 
   var chicagoButton = document.querySelector('#button-chicago');
   chicagoButton.addEventListener('click', mainMap.centerChicago.bind(mainMap))
+
+  var geoLocButton = document.querySelector('#button-where-am-i');
+  geoLocButton.addEventListener('click', mainMap.findLocation.bind(mainMap))
 }
 
 window.addEventListener('load', initialize);

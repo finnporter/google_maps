@@ -33,7 +33,19 @@ MapWrapper.prototype.bounceMarkers = function() {
 
 MapWrapper.prototype.centerChicago = function() {
   var chicago = {lat: 41.948438, lng: -87.655333};
+  console.log(chicago)
   this.googleMap.setCenter(chicago);
+};
+
+MapWrapper.prototype.findLocation = function() {
+  var geoLocation = navigator.geolocation
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    var here = {lat: lat, lng: lng};
+    console.log(here)
+    this.googleMap.setCenter(here);
+  })
 };
 
 MapWrapper.prototype.openInfoWindow = function(marker, infoData) {
@@ -42,9 +54,9 @@ MapWrapper.prototype.openInfoWindow = function(marker, infoData) {
  })
   google.maps.event.addListener(marker, 'click', function(marker) {
     infoWindow.open(this.googleMap, marker)});
-  console.log("marker is:", marker)
-  console.log("this is:", this)
-  console.log("infoWindow is:", infoWindow)
-  console.log("event is:", event)
+  // console.log("marker is:", marker)
+  // console.log("this is:", this)
+  // console.log("infoWindow is:", infoWindow)
+  // console.log("event is:", event)
 };
 
