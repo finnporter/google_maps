@@ -5,9 +5,12 @@ var initialize = function() {
   var infoData = '<div id="content">'+
             '<h1 id="firstHeading" class="firstHeading">Theo\'s Pizza</h1>'+
             '<div id="bodyContent">'+
-            '<p>Best Pizza in town.</p>'+
+            '<p><b>Theo\'s</b> serves the best pizza in town.</p> ' +
             '</div>'+
             '</div>';
+
+
+
   mainMap.addMarker(center);
 
 

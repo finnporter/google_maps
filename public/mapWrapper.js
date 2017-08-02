@@ -12,7 +12,7 @@ MapWrapper.prototype.addMarker = function(coords) {
     map: this.googleMap
   });
   this.markers.push(marker);
-
+  return marker;
 };
 
 MapWrapper.prototype.addClickEvent = function() {
@@ -35,26 +35,33 @@ MapWrapper.prototype.centerChicago = function() {
   var chicago = {lat: 41.948438, lng: -87.655333};
   console.log(chicago)
   this.googleMap.setCenter(chicago);
+  this.addMarker(chicago);
 };
 
 MapWrapper.prototype.findLocation = function() {
-  var geoLocation = navigator.geolocation
   navigator.geolocation.getCurrentPosition(function(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
     var here = {lat: lat, lng: lng};
-    console.log(here)
+    //console.log(here)
+    //console.log("this is:", this.googleMap)
     this.googleMap.setCenter(here);
-  })
+    this.addMarker(here);
+    //why is this. undefined?
+  }.bind(this))
 };
 
-MapWrapper.prototype.openInfoWindow = function(marker, infoData) {
+MapWrapper.prototype.openInfoWindow = function(coords, infoData) {
+  console.log(coords)
+  var marker = this.addMarker(coords);
+  console.log(marker)
+  google.maps.event.addListener(marker, 'click', function() {
   var infoWindow = new google.maps.InfoWindow({
    content: infoData
  })
-  google.maps.event.addListener(marker, 'click', function(marker) {
-    infoWindow.open(this.googleMap, marker)});
-  // console.log("marker is:", marker)
+    infoWindow.open(this.googleMap, marker)
+});
+ // console.log("marker is:", marker)
   // console.log("this is:", this)
   // console.log("infoWindow is:", infoWindow)
   // console.log("event is:", event)
